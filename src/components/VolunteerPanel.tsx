@@ -18,6 +18,7 @@ import {
   Input,
   ModalFooter,
   useDisclosure,
+  Select,
 } from '@chakra-ui/react';
 import { VolunteerProps } from '../types';
 
@@ -72,12 +73,17 @@ function VolunteerPanel({ volunteers }: VolunteerProps) {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader>Add Volunteer</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Stack spacing={3}>
               <Input placeholder="name" size="md" />
-              <Input placeholder="team" size="md" />
+              <Select placeholder="Select team">
+                <option value="propresenter">ProPresenter</option>
+                <option value="sound">Sound</option>
+                <option value="cm">Children&apos;s Ministry</option>
+                <option value="coffee">Coffee</option>
+              </Select>
             </Stack>
           </ModalBody>
 
