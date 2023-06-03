@@ -2,7 +2,12 @@ export type Volunteer = {
   id: number;
   name: string;
   phone: string;
+  schedule?: Schedule[];
 };
+
+export interface VolunteerProps {
+  volunteers: Volunteer[];
+}
 
 export type Schedule = {
   id: number;
@@ -11,12 +16,12 @@ export type Schedule = {
   time: string;
 };
 
+export interface ScheduleProps {
+  schedules?: Schedule[];
+}
+
 export type VolunteerStoreData = {
   volunteers: Volunteer[];
-};
-
-export type ScheduleStoreData = {
-  schedules: Schedule[];
 };
 
 export type VolunteerFormProps = {
