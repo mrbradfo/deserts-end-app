@@ -6,7 +6,7 @@ export type Volunteer = {
 };
 
 export interface VolunteerProps {
-  volunteers: Volunteer[];
+  volunteers: Volunteer[] | undefined;
 }
 
 export type Schedule = {

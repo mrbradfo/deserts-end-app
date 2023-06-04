@@ -2,6 +2,9 @@
   "name": "deserts-end-app",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "v16.17.0"
+  },
   "dependencies": {
     "@chakra-ui/icon": "^3.0.15",
     "@chakra-ui/react": "^2.5.5",

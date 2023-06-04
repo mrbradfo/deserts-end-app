@@ -23,29 +23,7 @@ import {
 import { VolunteerProps } from '../types';
 
 function VolunteerPanel({ volunteers }: VolunteerProps) {
-  console.log('volunteers:', volunteers);
-
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  // const [volunteers, setVolunteers] = useState([]);
-
-  // useEffect(() => {
-  //   const addVolunteer = async () => {
-  //     try {
-  //       const response = await handleAddVolunteer();
-  //       setVolunteers(response.data);
-  //     } catch (error) {
-  //       console.error('Error adding volunteer:', error);
-  //     }
-  //   };
-
-  //   addVolunteer();
-  // }, []);
-
-  // const handleAddVolunteer = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   onAddVolunteer(volunteerId);
-  // };
 
   return (
     <>
