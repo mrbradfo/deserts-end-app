@@ -3,39 +3,10 @@ import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import './Home.css';
 import SchedulePanel from './SchedulePanel';
 import VolunteerPanel from './VolunteerPanel';
-import { getVolunteers } from '../api';
-import { Volunteer } from '../types';
+import { getRoles, getVolunteers } from '../api';
+import { Role, User, Volunteer, VolunteerProps } from '../types';
 
 function Home() {
-  // const defaultVolunteers: VolunteerProps = {
-  //   volunteers: [
-  //     {
-  //       id: 1,
-  //       name: 'matt',
-  //       phone: '123-456-7890',
-  //       schedule: [
-  //         {
-  //           id: 1,
-  //           volunteerId: 1,
-  //           date: new Date(),
-  //           time: 'morning',
-  //         },
-  //         {
-  //           id: 2,
-  //           volunteerId: 1,
-  //           date: new Date(new Date().getDate() + 7),
-  //           time: 'afternoon',
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       id: 2,
-  //       name: 'john',
-  //       phone: '123-456-7890',
-  //     },
-  //   ],
-  // };
-
   const [volunteers, setVolunteers] = useState<Volunteer[]>();
 
   useEffect(() => {
@@ -51,6 +22,21 @@ function Home() {
     fetchVolunteers();
   }, []);
 
+  const [roles, setRoles] = useState<Role[]>();
+
+  useEffect(() => {
+    const fetchRoles = async () => {
+      try {
+        const response = await getRoles();
+        setRoles(response);
+      } catch (error) {
+        console.error('Error fetching Roles:', error);
+      }
+    };
+
+    fetchRoles();
+  }, []);
+
   return (
     <div className="Home">
       <header className="home-header">
@@ -58,13 +44,13 @@ function Home() {
       </header>
       <Tabs size="md" variant="enclosed" className="tabs">
         <TabList>
-          <Tab>Schedule</Tab>
+          <Tab>Team Schedule</Tab>
           <Tab>Volunteers</Tab>
         </TabList>
 
         <TabPanels>
-          <TabPanel>{SchedulePanel({ volunteers })}</TabPanel>
-          <TabPanel>{VolunteerPanel({ volunteers })}</TabPanel>
+          <TabPanel>{SchedulePanel({ volunteers, roles })}</TabPanel>
+          <TabPanel>{VolunteerPanel({ volunteers, roles })}</TabPanel>
         </TabPanels>
       </Tabs>
     </div>

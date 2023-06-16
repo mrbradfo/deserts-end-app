@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-
 import {
   Accordion,
   AccordionItem,
@@ -29,18 +27,18 @@ function VolunteerPanel({ volunteers }: VolunteerProps) {
     <>
       <Accordion allowToggle>
         {volunteers?.map((volunteer) => (
-          <AccordionItem key={volunteer.id}>
+          <AccordionItem key={volunteer.user.id}>
             <h2>
               <AccordionButton>
                 <Box as="span" flex="1" textAlign="left">
-                  {volunteer.name}
+                  {volunteer.user.first_name}
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
             <AccordionPanel pb={4}>
-              {volunteer.schedule?.map((schedule) => (
-                <div key={schedule.id}>{schedule.date.toDateString()}</div>
+              {volunteer.roles?.map((role) => (
+                <div key={role.id}>{role.date}</div>
               ))}
             </AccordionPanel>
           </AccordionItem>

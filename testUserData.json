@@ -1,0 +1,11 @@
+{
+  "id": 8,
+  "first_name": "Matt",
+  "last_name": "Bradford",
+  "email": "mattbradfo@showit.co",
+  "password": "password123",
+  "admin": 1,
+  "blackout_dates": null,
+  "txt_alerts": 0,
+  "email_alerts": 1
+}

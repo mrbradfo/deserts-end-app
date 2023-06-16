@@ -1,14 +1,11 @@
 import axios from 'axios';
-import { Volunteer } from './types';
+import { Role, Volunteer } from './types';
 
-// Read the API_ENDPOINT environment variable
-// load .env file
-// read API_ENDPOINT from .env file
-const endpoint = process.env.API_ENDPOINT;
-console.log('API_ENDPOINT:', endpoint);
+const baseURL = process.env.REACT_APP_API_ENDPOINT;
+console.log('REACT_APP_API_ENDPOINT:', baseURL);
 
 const api = axios.create({
-  baseURL: 'http://localhost:4545',
+  baseURL,
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
@@ -27,5 +24,17 @@ export const getVolunteers = async (): Promise<Volunteer[]> => {
     })
     .catch((error) => {
       console.error('Error retrieving volunteers:', error);
+    });
+};
+
+export const getRoles = async (): Promise<Role[]> => {
+  return api
+    .get('/roles')
+    .then((response) => {
+      const roles = response.data;
+      return roles;
+    })
+    .catch((error) => {
+      console.error('Error retrieving roles:', error);
     });
 };

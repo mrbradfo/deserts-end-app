@@ -23,11 +23,25 @@ html {
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+.volunteer-card{
+  /* // add padding to the card */
+  padding: 10px;
+}
   
+.arrows {
+  display: flex;
+  justify-content: space-between;
+}
+
 .home-title {
   color: #1c5767;
 }
 
 .tabs {
   padding: 20px;
+}
+
+.position-header {
+  text-align: left;
 }
