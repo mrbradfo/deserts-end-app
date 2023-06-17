@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import './Home.css';
-import SchedulePanel from './SchedulePanel';
-import VolunteerPanel from './VolunteerPanel';
 import { getRoles, getVolunteers } from '../api';
 import { Role, User, Volunteer, VolunteerProps } from '../types';
+import TeamSchedulePanel from './TeamSchedulePanel';
+import MySchedulePanel from './MySchedulePanel';
+import VolunteerSchedulePanel from './VolunteerSchedulePanel';
+import RolePanel from './RolePanel';
 
 function Home() {
   const [volunteers, setVolunteers] = useState<Volunteer[]>();
@@ -42,15 +44,19 @@ function Home() {
       <header className="home-header">
         <div className="home-title">DE</div>
       </header>
-      <Tabs size="md" variant="enclosed" className="tabs">
+      <Tabs variant="enclosed" className="tabs">
         <TabList>
           <Tab>Team Schedule</Tab>
+          <Tab>My Schedule</Tab>
           <Tab>Volunteers</Tab>
+          <Tab>Teams</Tab>
         </TabList>
 
         <TabPanels>
-          <TabPanel>{SchedulePanel({ volunteers, roles })}</TabPanel>
-          <TabPanel>{VolunteerPanel({ volunteers, roles })}</TabPanel>
+          <TabPanel>{TeamSchedulePanel({ volunteers, roles })}</TabPanel>
+          <TabPanel>{MySchedulePanel({ volunteers, roles })}</TabPanel>
+          <TabPanel>{VolunteerSchedulePanel({ volunteers, roles })}</TabPanel>
+          <TabPanel>{RolePanel({ volunteers, roles })}</TabPanel>
         </TabPanels>
       </Tabs>
     </div>

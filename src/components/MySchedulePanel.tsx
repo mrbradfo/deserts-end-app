@@ -16,6 +16,10 @@ import {
   ListItem,
   ListIcon,
   CardHeader,
+  Avatar,
+  Wrap,
+  WrapItem,
+  AvatarBadge,
 } from '@chakra-ui/react';
 import { VolunteerProps } from '../types';
 
@@ -45,12 +49,12 @@ MENU
 
 // position
 
-function SchedulePanel({ volunteers, roles }: VolunteerProps) {
+function MySchedulePanel({ volunteers, roles }: VolunteerProps) {
   console.log('roles', roles);
   console.log('volunteers', volunteers);
 
   return (
-    <Box maxW="500px" m="auto">
+    <Box maxW="1000px" m="auto">
       <Heading as="h1" size="lg" mb="4">
         Volunteer Schedule
       </Heading>
@@ -78,7 +82,6 @@ function SchedulePanel({ volunteers, roles }: VolunteerProps) {
                       <Thead>
                         <Tr>
                           <Th>Name</Th>
-                          <Th>Position</Th>
                           <Th>Date</Th>
                           <Th>Confirmed?</Th>
                         </Tr>
@@ -90,11 +93,22 @@ function SchedulePanel({ volunteers, roles }: VolunteerProps) {
                               !volunteer.user.first_name ? 'yellow.100' : ''
                             }
                           >
-                            {volunteer.user.first_name === null
-                              ? 'NEEDED'
-                              : volunteer.user.first_name}
+                            <Box display="flex" alignItems="center">
+                              <Avatar
+                                name={`${volunteer.user.first_name} ${volunteer.user.last_name}`}
+                              >
+                                <AvatarBadge
+                                  borderColor="papayawhip"
+                                  bg="green.500"
+                                  boxSize="1.25em"
+                                />
+                              </Avatar>
+
+                              {volunteer.user.first_name === null
+                                ? 'NEEDED'
+                                : volunteer.user.first_name}
+                            </Box>
                           </Td>
-                          <Td>{role.position}</Td>
                           <Td>{role.date}</Td>
                           <Td bg={role.confirmed ? 'green.200' : 'red.200'}>
                             {role.confirmed ? 'Yes' : <Button>Confirm</Button>}
@@ -147,4 +161,4 @@ function SchedulePanel({ volunteers, roles }: VolunteerProps) {
   );
 }
 
-export default SchedulePanel;
+export default MySchedulePanel;

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Role, Volunteer } from './types';
+import { Role, User, Volunteer } from './types';
 
 const baseURL = process.env.REACT_APP_API_ENDPOINT;
 console.log('REACT_APP_API_ENDPOINT:', baseURL);
@@ -36,5 +36,31 @@ export const getRoles = async (): Promise<Role[]> => {
     })
     .catch((error) => {
       console.error('Error retrieving roles:', error);
+    });
+};
+
+export const addVolunteer = async (
+  volunteer: Volunteer,
+): Promise<Volunteer> => {
+  return api
+    .post('/volunteers', volunteer)
+    .then((response) => {
+      const addedVolunteer = response.data;
+      return addedVolunteer;
+    })
+    .catch((error) => {
+      console.error('Error adding volunteer:', error);
+    });
+};
+
+export const addUser = async (user: User): Promise<User> => {
+  return api
+    .post('/users', user)
+    .then((response) => {
+      const addedUser = response.data;
+      return addedUser;
+    })
+    .catch((error) => {
+      console.error('Error adding user:', error);
     });
 };
