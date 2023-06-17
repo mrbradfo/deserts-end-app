@@ -36,7 +36,7 @@ function VolunteerSchedulePanel({ volunteers, roles }: VolunteerProps) {
   return (
     <Box maxW="1000px" m="auto">
       <Heading as="h1" size="lg" mb="4">
-        Volunteers
+        Teams
       </Heading>
       {volunteers?.map((volunteer) => (
         <Card key={volunteer.user.id}>

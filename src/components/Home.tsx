@@ -46,17 +46,17 @@ function Home() {
       </header>
       <Tabs variant="enclosed" className="tabs">
         <TabList>
+          <Tab>Teams</Tab>
           <Tab>Team Schedule</Tab>
           <Tab>My Schedule</Tab>
           <Tab>Volunteers</Tab>
-          <Tab>Teams</Tab>
         </TabList>
 
         <TabPanels>
+          <TabPanel>{RolePanel({ volunteers, roles })}</TabPanel>
           <TabPanel>{TeamSchedulePanel({ volunteers, roles })}</TabPanel>
           <TabPanel>{MySchedulePanel({ volunteers, roles })}</TabPanel>
           <TabPanel>{VolunteerSchedulePanel({ volunteers, roles })}</TabPanel>
-          <TabPanel>{RolePanel({ volunteers, roles })}</TabPanel>
         </TabPanels>
       </Tabs>
     </div>

@@ -116,40 +116,6 @@ function TeamSchedulePanel({ volunteers, roles }: VolunteerProps) {
         </Card>
       ))}
       <br />
-      {/* {volunteers?.map((volunteer) => (
-        <div key={volunteer.user.id}>
-          <div key={volunteer.user.id}>
-            <h2>
-              {volunteer.roles?.map((role) => (
-                <div key={role.id} className="volunteer-card">
-                  <Card>
-                    <Table variant="simple">
-                      <Thead>
-                        <Tr>
-                          <Th>Name</Th>
-                          <Th>Position</Th>
-                          <Th>Date</Th>
-                          <Th>Confirmed?</Th>
-                        </Tr>
-                      </Thead>
-                      <Tbody>
-                        <Tr>
-                          <Td>{volunteer.user.first_name}</Td>
-                          <Td>{role.position}</Td>
-                          <Td>{role.date}</Td>
-                          <Td bg={role.confirmed ? 'green.200' : 'red.200'}>
-                            {role.confirmed ? 'Yes' : <Button>Confirm</Button>}
-                          </Td>
-                        </Tr>
-                      </Tbody>
-                    </Table>
-                  </Card>
-                </div>
-              ))}
-            </h2>
-          </div>
-        </div>
-      ))} */}
     </Box>
   );
 }
