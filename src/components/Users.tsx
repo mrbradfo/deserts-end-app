@@ -20,7 +20,7 @@ import {
 import { VolunteerProps } from '../types';
 import { addVolunteer } from '../api';
 
-function VolunteerSchedulePanel({ volunteers, roles }: VolunteerProps) {
+function Users({ volunteers, roles }: VolunteerProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   // define onClose to call api to add volunteer to role and close modal
@@ -73,4 +73,4 @@ function VolunteerSchedulePanel({ volunteers, roles }: VolunteerProps) {
   );
 }
 
-export default VolunteerSchedulePanel;
+export default Users;

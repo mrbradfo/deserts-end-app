@@ -21,12 +21,11 @@ import {
   Flex,
   Text,
   Switch,
-  Code,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { User, VolunteerProps } from '../types';
 
-function RolePanel({ volunteers }: VolunteerProps) {
+function Teams({ volunteers }: VolunteerProps) {
   const {
     isOpen: addRoleIsOpen,
     onOpen: addRoleOnOpen,
@@ -204,4 +203,4 @@ function getSundayByOffset(offset: number) {
   return sunday;
 }
 
-export default RolePanel;
+export default Teams;
