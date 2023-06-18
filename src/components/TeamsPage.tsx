@@ -25,7 +25,7 @@ import {
 import { useState } from 'react';
 import { User, VolunteerProps } from '../types';
 
-function Teams({ volunteers }: VolunteerProps) {
+function TeamsPage({ users, teams, plans, assignments }: VolunteerProps) {
   const {
     isOpen: addRoleIsOpen,
     onOpen: addRoleOnOpen,
@@ -58,7 +58,7 @@ function Teams({ volunteers }: VolunteerProps) {
         <Button onClick={() => setOffset(offset + 1)}>Next Week</Button>
       </div>
       <br />
-      {volunteers?.map((volunteer) =>
+      {/* {volunteers?.map((volunteer) =>
         volunteer.roles.map((role) => (
           <SimpleGrid key={role.id} spacing={4} border="20px">
             <Card
@@ -187,7 +187,7 @@ function Teams({ volunteers }: VolunteerProps) {
             </Button>
           </ModalFooter>
         </ModalContent>
-      </Modal>
+      </Modal> */}
     </>
   );
 }
@@ -203,4 +203,4 @@ function getSundayByOffset(offset: number) {
   return sunday;
 }
 
-export default Teams;
+export default TeamsPage;

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Role, User, Volunteer } from './types';
+import { Plan, User, Assignment, Team } from './types';
 
 const baseURL = process.env.REACT_APP_API_ENDPOINT;
 console.log('REACT_APP_API_ENDPOINT:', baseURL);
@@ -14,42 +14,75 @@ const api = axios.create({
 
 axios.create({});
 
-// Make requests using the configured Axios instance
-export const getVolunteers = async (): Promise<Volunteer[]> => {
+export const getPlans = async (): Promise<Plan[]> => {
   return api
-    .get('/volunteers')
+    .get('/plans')
     .then((response) => {
-      const volunteers = response.data;
-      return volunteers;
+      const plans = response.data;
+      return plans;
     })
     .catch((error) => {
-      console.error('Error retrieving volunteers:', error);
+      console.error('Error retrieving plans:', error);
     });
 };
 
-export const getRoles = async (): Promise<Role[]> => {
+export const addPlan = async (plan: Plan): Promise<Plan> => {
   return api
-    .get('/roles')
+    .post('/plans', plan)
     .then((response) => {
-      const roles = response.data;
-      return roles;
+      const addedPlan = response.data;
+      return addedPlan;
     })
     .catch((error) => {
-      console.error('Error retrieving roles:', error);
+      console.error('Error adding plan:', error);
     });
 };
 
-export const addVolunteer = async (
-  volunteer: Volunteer,
-): Promise<Volunteer> => {
+export const getTeams = async (): Promise<Team[]> => {
   return api
-    .post('/volunteers', volunteer)
+    .get('/teams')
     .then((response) => {
-      const addedVolunteer = response.data;
-      return addedVolunteer;
+      const teams = response.data;
+      return teams;
     })
     .catch((error) => {
-      console.error('Error adding volunteer:', error);
+      console.error('Error retrieving teams:', error);
+    });
+};
+
+export const addTeam = async (team: Team): Promise<Team> => {
+  return api
+    .post('/teams', team)
+    .then((response) => {
+      const addedTeam = response.data;
+      return addedTeam;
+    })
+    .catch((error) => {
+      console.error('Error adding team:', error);
+    });
+};
+
+export const getAssignments = async (): Promise<Assignment[]> => {
+  return api
+    .get('/assignments')
+    .then((response) => {
+      const assignments = response.data;
+      return assignments;
+    })
+    .catch((error) => {
+      console.error('Error retrieving assignments:', error);
+    });
+};
+
+export const getUsers = async (): Promise<User[]> => {
+  return api
+    .get('/users')
+    .then((response) => {
+      const users = response.data;
+      return users;
+    })
+    .catch((error) => {
+      console.error('Error retrieving users:', error);
     });
 };
 
@@ -62,5 +95,53 @@ export const addUser = async (user: User): Promise<User> => {
     })
     .catch((error) => {
       console.error('Error adding user:', error);
+    });
+};
+
+export const getAll = async <T>(path: string): Promise<T[]> => {
+  return api
+    .get(path)
+    .then((response) => {
+      const { data } = JSON.parse(JSON.stringify(response));
+      return data;
+    })
+    .catch((error) => {
+      console.error(`Error retrieving ${path}:`, error);
+    });
+};
+
+export const add = async <T>(path: string, data: T): Promise<T> => {
+  return api
+    .post(path, data)
+    .then((response) => {
+      const { data: addedData } = response;
+      return addedData;
+    })
+    .catch((error) => {
+      console.error(`Error adding ${path}:`, error);
+    });
+};
+
+export const update = async <T>(path: string, data: T): Promise<T> => {
+  return api
+    .put(path, data)
+    .then((response) => {
+      const { data: updatedData } = response;
+      return updatedData;
+    })
+    .catch((error) => {
+      console.error(`Error updating ${path}:`, error);
+    });
+};
+
+export const remove = async <T>(path: string, id: number): Promise<T> => {
+  return api
+    .delete(`${path}/${id}`)
+    .then((response) => {
+      const { data: removedData } = response;
+      return removedData;
+    })
+    .catch((error) => {
+      console.error(`Error removing ${path}:`, error);
     });
 };

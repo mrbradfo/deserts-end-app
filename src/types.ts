@@ -1,11 +1,3 @@
-export type Role = {
-  id: number;
-  user_id: number;
-  position: string;
-  date: string;
-  description: string;
-  confirmed: boolean;
-};
 export type User = {
   id: number;
   first_name: string;
@@ -17,36 +9,49 @@ export type User = {
   txt_alerts: boolean;
   email_alerts: boolean;
 };
-export type Volunteer = {
-  user: User;
-  roles: Role[];
+export type Team = {
+  id: number;
+  name: string;
+  description: string;
+  positions: string;
+};
+
+export type Plan = {
+  id: number;
+  name: string;
+  description: string;
+  date: Date;
+};
+
+export type Assignment = {
+  id: number;
+  user_id: number;
+  plan_id: number;
+  position: string;
+  notes: string;
+  date: Date;
 };
 
 export interface VolunteerProps {
-  volunteers: Volunteer[] | undefined;
-  roles: Role[] | undefined;
+  users: User[] | undefined;
+  teams: Team[] | undefined;
+  plans: Plan[] | undefined;
+  assignments: Assignment[] | undefined;
 }
 
-export type Schedule = {
-  id: number;
-  volunteerId: number;
-  date: Date;
-  time: string;
-};
+// export interface ScheduleProps {
+//   schedules?: Schedule[];
+// }
 
-export interface ScheduleProps {
-  schedules?: Schedule[];
-}
+// export type VolunteerStoreData = {
+//   volunteers: Volunteer[];
+// };
 
-export type VolunteerStoreData = {
-  volunteers: Volunteer[];
-};
+// export type VolunteerFormProps = {
+//   onAddVolunteer: (name: string, phone: string) => void;
+// };
 
-export type VolunteerFormProps = {
-  onAddVolunteer: (name: string, phone: string) => void;
-};
-
-export type VolunteerListProps = {
-  volunteers: Volunteer[];
-  onRemoveVolunteer: (id: number) => void;
-};
+// export type VolunteerListProps = {
+//   volunteers: Volunteer[];
+//   onRemoveVolunteer: (id: number) => void;
+// };

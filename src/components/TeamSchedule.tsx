@@ -25,11 +25,11 @@ import {
 import { useState } from 'react';
 import { User, VolunteerProps } from '../types';
 
-function TeamSchedule({ volunteers, roles }: VolunteerProps) {
+function TeamSchedule({ users, teams, plans, assignments }: VolunteerProps) {
   const {
-    isOpen: addRoleIsOpen,
-    onOpen: addRoleOnOpen,
-    onClose: addRoleOnClose,
+    isOpen: addTeamIsOpen,
+    onOpen: addTeamOnOpen,
+    onClose: addTeamOnClose,
   } = useDisclosure();
 
   const {
@@ -41,8 +41,11 @@ function TeamSchedule({ volunteers, roles }: VolunteerProps) {
   const [offset, setOffset] = useState(1);
   const [userModalData, setUserModalData] = useState<User>({} as User);
 
-  const handleOpenUserModal = (data: User) => {
-    setUserModalData(data);
+  const plan = plans?.find((p) => p.id === offset);
+
+  const handleOpenUserModal = (userId: number) => {
+    const user = users?.find((u) => u.id === userId);
+    setUserModalData(user || ({} as User));
     viewUserOnOpen();
   };
 
@@ -57,80 +60,98 @@ function TeamSchedule({ volunteers, roles }: VolunteerProps) {
         <Button onClick={() => setOffset(offset + 1)}>Next Week</Button>
       </div>
       <br />
-      {volunteers?.map((volunteer) =>
-        volunteer.roles.map((role) => (
-          <SimpleGrid key={role.id} spacing={4} border="20px">
-            <Card
-              outline={20}
-              border="200px"
-              borderColor="black"
-              backgroundColor="blue.100"
-              textAlign="left"
-            >
-              <CardHeader>
-                <Heading as="h2" size="md" textAlign="left">
-                  {role.position}
-                </Heading>
-              </CardHeader>
-              <CardBody className="card-body">
-                <Flex gap={2} alignItems="center">
-                  <Button
-                    border="2px solid #1c5767"
-                    borderRadius="10px"
-                    padding="20px"
-                    onClick={() => handleOpenUserModal(volunteer.user)}
-                  >
-                    <Avatar
-                      size="sm"
-                      name={
-                        volunteer.user.id
-                          ? `${volunteer.user.first_name} ${volunteer.user.last_name}`
-                          : '?'
-                      }
-                    >
-                      <AvatarBadge
-                        borderColor="papayawhip"
-                        bg={
-                          // if volunteer.user.id is null, bg is red, if role.confirmed is false, bg is yellow, else bg is green
-                          // confirmed pending declined
-                          // eslint-disable-next-line no-nested-ternary
-                          volunteer.user.id
-                            ? role.confirmed
-                              ? 'green.500'
-                              : 'yellow.500'
-                            : 'red.500'
-                        }
-                        boxSize="1.25em"
-                      />
-                    </Avatar>
-                    <Box>
-                      {volunteer.user.first_name} {volunteer.user.last_name}
-                    </Box>
-                  </Button>
-                </Flex>
-              </CardBody>
-            </Card>
-            <br />
-          </SimpleGrid>
-        )),
-      )}
-      <Button onClick={addRoleOnOpen}>Add Role</Button>
-      <Modal isOpen={addRoleIsOpen} onClose={addRoleOnClose}>
+      {teams?.map((team) => (
+        <SimpleGrid key={team.id} spacing={4} border="20px">
+          <Card
+            outline={20}
+            border="200px"
+            borderColor="black"
+            backgroundColor="blue.100"
+            textAlign="left"
+          >
+            <CardHeader>
+              <Heading as="h3" size="md" textAlign="left">
+                {team.name}
+              </Heading>
+            </CardHeader>
+            <CardBody className="card-body">
+              {JSON.parse(team.positions)?.map((position: string) => (
+                <Box key={team.id}>
+                  <Text fontWeight={700}>{position}</Text>
+                  {assignments?.map((assignment) => {
+                    if (
+                      assignment.plan_id === plan?.id &&
+                      assignment.position === position
+                    ) {
+                      const user = users?.find(
+                        (u) => u.id === assignment.user_id,
+                      );
+
+                      return (
+                        <Flex key={assignment.id} gap={2} alignItems="center">
+                          <Button
+                            border="2px solid #1c5767"
+                            borderRadius="10px"
+                            padding="20px"
+                            onClick={
+                              () => handleOpenUserModal(assignment.user_id)
+                              // eslint-disable-next-line react/jsx-curly-newline
+                            }
+                          >
+                            <Avatar
+                              size="sm"
+                              name={
+                                assignment.user_id
+                                  ? `${user?.first_name} ${user?.last_name}`
+                                  : '?'
+                              }
+                            >
+                              <AvatarBadge
+                                borderColor="papayawhip"
+                                bg={
+                                  // confirmed pending declined
+                                  // eslint-disable-next-line no-nested-ternary
+                                  assignment.user_id
+                                    ? 'green.500'
+                                    : 'yellow.500'
+                                }
+                                boxSize="1.25em"
+                              />
+                            </Avatar>
+                            <Box>
+                              {user?.first_name} {user?.last_name}
+                            </Box>
+                          </Button>
+                        </Flex>
+                      );
+                    }
+                    return null;
+                  })}
+                </Box>
+              ))}
+            </CardBody>
+          </Card>
+          <br />
+        </SimpleGrid>
+      ))}
+      <Button onClick={addTeamOnOpen}>Add Team</Button>
+      <Modal isOpen={addTeamIsOpen} onClose={addTeamOnClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Add Role</ModalHeader>
+          <ModalHeader>Add Team</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Stack spacing={3}>
               <Input placeholder="name" size="md" />
+              <Input placeholder="positions" size="md" />
             </Stack>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={addRoleOnClose}>
+            <Button colorScheme="blue" mr={3} onClick={addTeamOnClose}>
               Close
             </Button>
-            <Button variant="blue">Add Role</Button>
+            <Button variant="blue">Add Team</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

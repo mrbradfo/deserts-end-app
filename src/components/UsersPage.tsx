@@ -18,9 +18,8 @@ import {
   ModalBody,
 } from '@chakra-ui/react';
 import { VolunteerProps } from '../types';
-import { addVolunteer } from '../api';
 
-function Users({ volunteers, roles }: VolunteerProps) {
+function UsersPage({ users, teams, plans, assignments }: VolunteerProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   // define onClose to call api to add volunteer to role and close modal
@@ -38,7 +37,7 @@ function Users({ volunteers, roles }: VolunteerProps) {
       <Heading as="h1" size="lg" mb="4">
         Teams
       </Heading>
-      {volunteers?.map((volunteer) => (
+      {/* {volunteers?.map((volunteer) => (
         <Card key={volunteer.user.id}>
           <CardHeader>
             <Avatar size="sm" name={volunteer.user.first_name} />
@@ -68,9 +67,9 @@ function Users({ volunteers, roles }: VolunteerProps) {
             </Button>
           </ModalFooter>
         </ModalContent>
-      </Modal>
+      </Modal> */}
     </Box>
   );
 }
 
-export default Users;
+export default UsersPage;
