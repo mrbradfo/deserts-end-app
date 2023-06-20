@@ -13,7 +13,7 @@ export type Team = {
   id: number;
   name: string;
   description: string;
-  positions: string;
+  positions: string[];
 };
 
 export type Plan = {

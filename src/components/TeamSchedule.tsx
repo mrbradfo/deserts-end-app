@@ -66,33 +66,39 @@ function TeamSchedule({ users, teams, plans, assignments }: VolunteerProps) {
             outline={20}
             border="200px"
             borderColor="black"
-            backgroundColor="blue.100"
+            backgroundColor="#034654"
             textAlign="left"
+            borderRadius={10}
           >
-            <CardHeader>
+            <CardHeader
+              backgroundColor="#fbe8d7"
+              borderRadius="10px 10px 0px 0px"
+            >
               <Heading as="h3" size="md" textAlign="left">
                 {team.name}
               </Heading>
             </CardHeader>
-            <CardBody className="card-body">
-              {JSON.parse(team.positions)?.map((position: string) => (
+            <CardBody className="card-body" borderRadius={10} color="white">
+              {team.positions?.map((position: string) => (
                 <Box key={team.id}>
                   <Text fontWeight={700}>{position}</Text>
                   {assignments?.map((assignment) => {
+                    const user = users?.find(
+                      (u) => u.id === assignment.user_id,
+                    );
                     if (
                       assignment.plan_id === plan?.id &&
                       assignment.position === position
                     ) {
-                      const user = users?.find(
-                        (u) => u.id === assignment.user_id,
-                      );
-
                       return (
                         <Flex key={assignment.id} gap={2} alignItems="center">
                           <Button
-                            border="2px solid #1c5767"
+                            border="1px solid #6098a6"
                             borderRadius="10px"
-                            padding="20px"
+                            padding="25px 15px"
+                            backgroundColor="#fbe8d7"
+                            color="black"
+                            _hover={{ bg: '#1c5767' }}
                             onClick={
                               () => handleOpenUserModal(assignment.user_id)
                               // eslint-disable-next-line react/jsx-curly-newline
@@ -105,6 +111,7 @@ function TeamSchedule({ users, teams, plans, assignments }: VolunteerProps) {
                                   ? `${user?.first_name} ${user?.last_name}`
                                   : '?'
                               }
+                              padding-right={4}
                             >
                               <AvatarBadge
                                 borderColor="papayawhip"
@@ -118,15 +125,19 @@ function TeamSchedule({ users, teams, plans, assignments }: VolunteerProps) {
                                 boxSize="1.25em"
                               />
                             </Avatar>
-                            <Box>
-                              {user?.first_name} {user?.last_name}
+                            <Box fontWeight={400} padding="10px">
+                              {user
+                                ? `${user?.first_name} ${user?.last_name}`
+                                : 'Needed'}
                             </Box>
                           </Button>
                         </Flex>
                       );
                     }
+
                     return null;
                   })}
+                  <br />
                 </Box>
               ))}
             </CardBody>
