@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import {
   Button,
   Modal,
@@ -14,18 +15,19 @@ import {
   CardHeader,
   Heading,
   Card,
-  Avatar,
-  AvatarBadge,
   SimpleGrid,
   Box,
-  Flex,
   Text,
   Switch,
+  Flex,
+  AvatarBadge,
+  Avatar,
+  Badge,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { User, VolunteerProps } from '../types';
 
-function TeamSchedule({ users, teams, plans, assignments }: VolunteerProps) {
+function TeamSchedule({ plan_views, users, teams }: VolunteerProps) {
   const {
     isOpen: addTeamIsOpen,
     onOpen: addTeamOnOpen,
@@ -38,13 +40,13 @@ function TeamSchedule({ users, teams, plans, assignments }: VolunteerProps) {
     onClose: viewUserOnClose,
   } = useDisclosure();
 
-  const [offset, setOffset] = useState(1);
+  const [offset, setOffset] = useState(0);
   const [userModalData, setUserModalData] = useState<User>({} as User);
 
-  const plan = plans?.find((p) => p.id === offset);
+  const plan = plan_views && plan_views[offset]?.plan;
+  console.log('plan from offset is ', plan);
 
-  const handleOpenUserModal = (userId: number) => {
-    const user = users?.find((u) => u.id === userId);
+  const handleOpenUserModal = (user: User) => {
     setUserModalData(user || ({} as User));
     viewUserOnOpen();
   };
@@ -60,7 +62,7 @@ function TeamSchedule({ users, teams, plans, assignments }: VolunteerProps) {
         <Button onClick={() => setOffset(offset + 1)}>Next Week</Button>
       </div>
       <br />
-      {teams?.map((team) => (
+      {plan?.teams?.map((team) => (
         <SimpleGrid key={team.id} spacing={4} border="20px">
           <Card
             outline={20}
@@ -79,19 +81,18 @@ function TeamSchedule({ users, teams, plans, assignments }: VolunteerProps) {
               </Heading>
             </CardHeader>
             <CardBody className="card-body" borderRadius={10} color="white">
-              {team.positions?.map((position: string) => (
-                <Box key={team.id}>
-                  <Text fontWeight={700}>{position}</Text>
-                  {assignments?.map((assignment) => {
-                    const user = users?.find(
-                      (u) => u.id === assignment.user_id,
-                    );
-                    if (
-                      assignment.plan_id === plan?.id &&
-                      assignment.position === position
-                    ) {
-                      return (
-                        <Flex key={assignment.id} gap={2} alignItems="center">
+              <div key={team.id}>
+                {/* <div>{team.accepted}</div>
+                    <div>{team.pending}</div>
+                    <div>{team.declined}</div> */}
+                {team.positions.map((position) => (
+                  <div key={position.id}>
+                    <Heading as="h3" size="md">
+                      {position.name}
+                    </Heading>
+                    {position.volunteers.map((volunteer) => (
+                      <div key={volunteer.id}>
+                        <Flex gap={2} alignItems="center">
                           <Button
                             border="1px solid #6098a6"
                             borderRadius="10px"
@@ -100,15 +101,15 @@ function TeamSchedule({ users, teams, plans, assignments }: VolunteerProps) {
                             color="black"
                             _hover={{ bg: '#1c5767' }}
                             onClick={
-                              () => handleOpenUserModal(assignment.user_id)
+                              () => handleOpenUserModal(volunteer.user)
                               // eslint-disable-next-line react/jsx-curly-newline
                             }
                           >
                             <Avatar
                               size="sm"
                               name={
-                                assignment.user_id
-                                  ? `${user?.first_name} ${user?.last_name}`
+                                volunteer.user
+                                  ? `${volunteer.user?.first_name} ${volunteer.user?.last_name}`
                                   : '?'
                               }
                               padding-right={4}
@@ -118,107 +119,58 @@ function TeamSchedule({ users, teams, plans, assignments }: VolunteerProps) {
                                 bg={
                                   // confirmed pending declined
                                   // eslint-disable-next-line no-nested-ternary
-                                  assignment.user_id
+                                  volunteer.confirmation_status === 'Confirmed'
                                     ? 'green.500'
-                                    : 'yellow.500'
+                                    : volunteer.confirmation_status ===
+                                      'Pending'
+                                    ? 'yellow.500'
+                                    : volunteer.confirmation_status ===
+                                      'Declined'
+                                    ? 'red.500'
+                                    : 'gray.500'
                                 }
                                 boxSize="1.25em"
                               />
                             </Avatar>
                             <Box fontWeight={400} padding="10px">
-                              {user
-                                ? `${user?.first_name} ${user?.last_name}`
+                              {volunteer.user
+                                ? `${volunteer.user?.first_name} ${volunteer.user?.last_name}`
                                 : 'Needed'}
+                              <Badge
+                                ml="1"
+                                colorScheme={
+                                  volunteer.confirmation_status === 'Confirmed'
+                                    ? 'green'
+                                    : volunteer.confirmation_status ===
+                                      'Pending'
+                                    ? 'yellow'
+                                    : volunteer.confirmation_status ===
+                                      'Declined'
+                                    ? 'red'
+                                    : 'gray'
+                                }
+                              >
+                                {volunteer.confirmation_status}
+                              </Badge>
                             </Box>
                           </Button>
                         </Flex>
-                      );
-                    }
-
-                    return null;
-                  })}
-                  <br />
-                </Box>
-              ))}
+                      </div>
+                    ))}
+                    {position.capacity - position.filled > 0 && (
+                      <Button onClick={() => addTeamOnOpen()}>
+                        {position.capacity - position.filled}
+                      </Button>
+                    )}
+                    <br />
+                  </div>
+                ))}
+              </div>
             </CardBody>
           </Card>
           <br />
         </SimpleGrid>
       ))}
-      <Button onClick={addTeamOnOpen}>Add Team</Button>
-      <Modal isOpen={addTeamIsOpen} onClose={addTeamOnClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Add Team</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Stack spacing={3}>
-              <Input placeholder="name" size="md" />
-              <Input placeholder="positions" size="md" />
-            </Stack>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={addTeamOnClose}>
-              Close
-            </Button>
-            <Button variant="blue">Add Team</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-      <Modal isOpen={viewUserIsOpen} onClose={viewUserOnClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>
-            {`${userModalData.first_name} ${userModalData.last_name}`}
-          </ModalHeader>
-          <ModalCloseButton />
-
-          <ModalBody>
-            <Text>
-              <strong>ID:</strong> {userModalData.id}
-            </Text>
-            <Text>
-              <strong>First Name:</strong> {userModalData.first_name}
-            </Text>
-            <Text>
-              <strong>Last Name:</strong> {userModalData.last_name}
-            </Text>
-            <Text>
-              <strong>Email:</strong> {userModalData.email}
-            </Text>
-
-            <Text>
-              <strong>Admin:</strong> {userModalData.admin ? 'Yes' : 'No'}
-            </Text>
-            <Text>
-              <strong>Blackout Dates:</strong> {userModalData.blackout_dates}
-              <Button>Add Blackout Dates</Button>
-            </Text>
-            <Text>
-              <strong>Text Reminders:</strong>
-              <Switch
-                colorScheme="teal"
-                isChecked={userModalData.txt_alerts}
-                // onChange={handleTxtRemindersChange}
-              />
-            </Text>
-            <Text>
-              <strong>Email Reminders:</strong>
-              <Switch
-                colorScheme="teal"
-                isChecked={userModalData.email_alerts}
-                // onChange={handleEmailRemindersChange}
-              />
-            </Text>
-          </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={viewUserOnClose}>
-              Close
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
     </>
   );
 }

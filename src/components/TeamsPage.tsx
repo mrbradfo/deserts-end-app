@@ -25,7 +25,7 @@ import {
 import { useState } from 'react';
 import { User, VolunteerProps } from '../types';
 
-function TeamsPage({ users, teams, plans, assignments }: VolunteerProps) {
+function TeamsPage({ plan_views, users, teams }: VolunteerProps) {
   const {
     isOpen: addRoleIsOpen,
     onOpen: addRoleOnOpen,

@@ -19,7 +19,7 @@ import {
 } from '@chakra-ui/react';
 import { VolunteerProps } from '../types';
 
-function UsersPage({ users, teams, plans, assignments }: VolunteerProps) {
+function UsersPage({ plan_views, users, teams }: VolunteerProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   // define onClose to call api to add volunteer to role and close modal

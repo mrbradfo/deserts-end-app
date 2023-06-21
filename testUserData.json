@@ -1,11 +1,304 @@
 {
-  "id": 8,
-  "first_name": "Matt",
-  "last_name": "Bradford",
-  "email": "mattbradfo@showit.co",
-  "password": "password123",
-  "admin": 1,
-  "blackout_dates": null,
-  "txt_alerts": 0,
-  "email_alerts": 1
+  "id": 1,
+  "date": "2023-04-09",
+  "name": "Sunday Service",
+  "teams": [
+    {
+      "id": 1,
+      "name": "Hospitality Team",
+      "positions": [
+        {
+          "id": 1,
+          "name": "Coffee",
+          "volunteers": [
+            {
+              "id": 1,
+              "user": {
+                "id": 1,
+                "last_name": "Doe",
+                "first_name": "John"
+              },
+              "notes": "Available for the entire service",
+              "confirmation_status": "Confirmed"
+            }
+          ],
+          "filled_count": 0,
+          "capacity_count": 1
+        }
+      ],
+      "description": "Team responsible for welcoming and assisting guests"
+    },
+    {
+      "id": 2,
+      "name": "Technical Team",
+      "positions": [
+        {
+          "id": 2,
+          "name": "Sound",
+          "volunteers": [
+            {
+              "id": 2,
+              "user": {
+                "id": 2,
+                "last_name": "Smith",
+                "first_name": "Jane"
+              },
+              "notes": "Will confirm by Thursday",
+              "confirmation_status": "Pending"
+            }
+          ],
+          "filled_count": 0,
+          "capacity_count": 1
+        },
+        {
+          "id": 3,
+          "name": "ProPresenter",
+          "volunteers": [
+            {
+              "id": 3,
+              "user": {
+                "id": 3,
+                "last_name": "Johnson",
+                "first_name": "Mike"
+              },
+              "notes": "Unable to attend on that date",
+              "confirmation_status": "Declined"
+            }
+          ],
+          "filled_count": 0,
+          "capacity_count": 1
+        }
+      ],
+      "description": "Team responsible for sound and visual setup"
+    },
+    {
+      "id": 3,
+      "name": "Worship Team",
+      "positions": [
+        {
+          "id": 4,
+          "name": "Vocals",
+          "volunteers": [
+            {
+              "id": 4,
+              "user": {
+                "id": 4,
+                "last_name": "Wilson",
+                "first_name": "Sarah"
+              },
+              "notes": "Will confirm by Thursday",
+              "confirmation_status": "Pending"
+            }
+          ],
+          "filled_count": 0,
+          "capacity_count": 1
+        },
+        {
+          "id": 5,
+          "name": "Guitar",
+          "volunteers": [
+            {
+              "id": 5,
+              "user": {
+                "id": 5,
+                "last_name": "Brown",
+                "first_name": "Michael"
+              },
+              "notes": "Available for the entire service",
+              "confirmation_status": "Confirmed"
+            }
+          ],
+          "filled_count": 0,
+          "capacity_count": 1
+        },
+        {
+          "id": 6,
+          "name": "Bass",
+          "volunteers": [
+            {
+              "id": 6,
+              "user": {
+                "id": 6,
+                "last_name": "Davis",
+                "first_name": "Emily"
+              },
+              "notes": "Will confirm by Thursday",
+              "confirmation_status": "Pending"
+            }
+          ],
+          "filled_count": 0,
+          "capacity_count": 1
+        },
+        {
+          "id": 7,
+          "name": "Drums",
+          "volunteers": [
+            {
+              "id": 7,
+              "user": {
+                "id": 7,
+                "last_name": "Anderson",
+                "first_name": "David"
+              },
+              "notes": "Available for the entire service",
+              "confirmation_status": "Confirmed"
+            }
+          ],
+          "filled_count": 0,
+          "capacity_count": 1
+        },
+        {
+          "id": 8,
+          "name": "Piano",
+          "volunteers": [
+            {
+              "id": 8,
+              "user": {
+                "id": 8,
+                "last_name": "Martinez",
+                "first_name": "Olivia"
+              },
+              "notes": "Will confirm by Thursday",
+              "confirmation_status": "Pending"
+            }
+          ],
+          "filled_count": 0,
+          "capacity_count": 1
+        }
+      ],
+      "description": "Team responsible for leading the congregation in worship"
+    },
+    {
+      "id": 4,
+      "name": "Childrens Ministry",
+      "positions": [
+        {
+          "id": 9,
+          "name": "Nursery",
+          "volunteers": [
+            {
+              "id": 9,
+              "user": {
+                "id": 9,
+                "last_name": "Garcia",
+                "first_name": "Daniel"
+              },
+              "notes": "Will confirm by Thursday",
+              "confirmation_status": "Pending"
+            }
+          ],
+          "filled_count": 0,
+          "capacity_count": 2
+        },
+        {
+          "id": 10,
+          "name": "Preschool",
+          "volunteers": [
+            {
+              "id": 10,
+              "user": {
+                "id": 10,
+                "last_name": "Lopez",
+                "first_name": "Sophia"
+              },
+              "notes": "Available for the entire service",
+              "confirmation_status": "Confirmed"
+            }
+          ],
+          "filled_count": 0,
+          "capacity_count": 2
+        },
+        {
+          "id": 11,
+          "name": "Elementary",
+          "volunteers": [
+            {
+              "id": 11,
+              "user": {
+                "id": 11,
+                "last_name": "Hernandez",
+                "first_name": "Matthew"
+              },
+              "notes": "Will confirm by Thursday",
+              "confirmation_status": "Pending"
+            }
+          ],
+          "filled_count": 0,
+          "capacity_count": 2
+        }
+      ],
+      "description": "Team responsible for teaching and caring for children"
+    },
+    {
+      "id": 5,
+      "name": "Teaching",
+      "positions": [
+        {
+          "id": 12,
+          "name": "Teaching",
+          "volunteers": [
+            {
+              "id": 12,
+              "user": {
+                "id": 12,
+                "last_name": "Gonzalez",
+                "first_name": "Ava"
+              },
+              "notes": "Will confirm by Thursday",
+              "confirmation_status": "Pending"
+            }
+          ],
+          "filled_count": 0,
+          "capacity_count": 2
+        }
+      ],
+      "description": "Team responsible for teaching and assisting"
+    },
+    {
+      "id": 6,
+      "name": "Setup / Teardown",
+      "positions": [
+        {
+          "id": 13,
+          "name": "Setup",
+          "volunteers": [
+            {
+              "id": 13,
+              "user": {
+                "id": 13,
+                "last_name": "Rivera",
+                "first_name": "Ethan"
+              },
+              "notes": "Available for the entire service",
+              "confirmation_status": "Confirmed"
+            }
+          ],
+          "filled_count": 0,
+          "capacity_count": 3
+        },
+        {
+          "id": 14,
+          "name": "Teardown",
+          "volunteers": [
+            {
+              "id": 14,
+              "user": {
+                "id": 14,
+                "last_name": "Walker",
+                "first_name": "Emma"
+              },
+              "notes": "Will confirm by Thursday",
+              "confirmation_status": "Pending"
+            }
+          ],
+          "filled_count": 0,
+          "capacity_count": 3
+        }
+      ],
+      "description": "Team responsible for setting up and tearing down"
+    }
+  ],
+  "pending_count": 15,
+  "declined_count": 2,
+  "confirmed_count": 5
 }

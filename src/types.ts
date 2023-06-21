@@ -9,34 +9,49 @@ export type User = {
   txt_alerts: boolean;
   email_alerts: boolean;
 };
+
+export type Volunteer = {
+  id: number;
+  user: User;
+  plan_id: number;
+  confirmation_status: string;
+  notes: string;
+};
+
+export type Position = {
+  id: number;
+  volunteers: Volunteer[]; // people assigned to this position
+  name: string;
+  capacity: number;
+  filled: number;
+};
+
 export type Team = {
   id: number;
   name: string;
   description: string;
-  positions: string[];
+  positions: Position[];
 };
 
 export type Plan = {
   id: number;
   name: string;
-  description: string;
+  confirmed_count: number;
+  pending_count: number;
+  declined_count: number;
+  teams: Team[];
   date: Date;
 };
 
-export type Assignment = {
+export type PlanView = {
   id: number;
-  user_id: number;
-  plan_id: number;
-  position: string;
-  notes: string;
-  date: Date;
+  plan: Plan;
 };
 
 export interface VolunteerProps {
   users: User[] | undefined;
   teams: Team[] | undefined;
-  plans: Plan[] | undefined;
-  assignments: Assignment[] | undefined;
+  plan_views: PlanView[] | undefined;
 }
 
 // export interface ScheduleProps {

@@ -49,7 +49,7 @@ MENU
 
 // position
 
-function MySchedule({ users, teams, plans, assignments }: VolunteerProps) {
+function MySchedule({ plan_views, users, teams }: VolunteerProps) {
   return (
     // <Box maxW="1000px" m="auto">
     //   <Heading as="h1" size="lg" mb="4">
