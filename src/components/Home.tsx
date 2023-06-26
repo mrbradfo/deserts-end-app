@@ -1,5 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
+import {
+  Button,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+} from '@chakra-ui/react';
 import './Home.css';
 import { getAll } from '../api';
 import TeamSchedule from './TeamSchedule';
@@ -61,6 +68,26 @@ function Home() {
       <header className="home-header">
         <div className="home-title">DE</div>
       </header>
+      <Button
+        colorScheme="teal"
+        variant="outline"
+        size="sm"
+        onClick={() => {
+          window.location.href = '/manage-teams';
+        }}
+      >
+        Manage Teams
+      </Button>
+      <Button
+        colorScheme="teal"
+        variant="outline"
+        size="sm"
+        onClick={() => {
+          window.location.href = '/manage-schedules';
+        }}
+      >
+        Manage Schedules
+      </Button>
       <Tabs variant="enclosed" className="tabs">
         <TabList>
           <Tab>Team Schedule</Tab>
