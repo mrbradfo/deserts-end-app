@@ -13,8 +13,6 @@ import { getAll } from '../api';
 import TeamSchedule from './TeamSchedule';
 import MySchedule from './MySchedule';
 import { PlanView, Team, User } from '../types';
-import UsersPage from './UsersPage';
-import TeamsPage from './TeamsPage';
 
 function Home() {
   const navigate = useNavigate();
@@ -90,15 +88,11 @@ function Home() {
         <TabList>
           <Tab>Team Schedule</Tab>
           <Tab>My Schedule</Tab>
-          <Tab>Users</Tab>
-          <Tab>Teams</Tab>
         </TabList>
 
         <TabPanels>
           <TabPanel>{TeamSchedule({ plan_views, teams, users })}</TabPanel>
           <TabPanel>{MySchedule({ plan_views, teams, users })}</TabPanel>
-          <TabPanel>{UsersPage({ plan_views, teams, users })}</TabPanel>
-          <TabPanel>{TeamsPage({ plan_views, teams, users })}</TabPanel>
         </TabPanels>
       </Tabs>
     </div>
