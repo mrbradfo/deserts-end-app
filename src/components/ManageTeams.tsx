@@ -8,12 +8,20 @@ import {
   TabPanels,
   Tabs,
 } from '@chakra-ui/react';
-import { VolunteerProps } from '../types';
+import { useNavigate } from 'react-router';
+import useUser from '../hooks/useUser';
 
-// function ManageTeams({ plan_views, users, teams }: VolunteerProps) {
 function ManageTeams() {
+  const navigate = useNavigate();
+  const { user } = useUser(1);
+  console.log('user', user);
+
+  // const { teams } = useTeams();
+  // const { plan_views } = usePlanViews();
+
   return (
     <>
+      <Button onClick={() => navigate('/')}>Back</Button>
       <Heading as="h1" size="lg" mb="4">
         Manage Teams
       </Heading>

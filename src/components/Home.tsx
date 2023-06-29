@@ -8,6 +8,7 @@ import {
   Tabs,
 } from '@chakra-ui/react';
 import './Home.css';
+import { useNavigate } from 'react-router';
 import { getAll } from '../api';
 import TeamSchedule from './TeamSchedule';
 import MySchedule from './MySchedule';
@@ -16,6 +17,7 @@ import UsersPage from './UsersPage';
 import TeamsPage from './TeamsPage';
 
 function Home() {
+  const navigate = useNavigate();
   const [users, setUsers] = useState<User[]>();
   const [teams, setTeams] = useState<Team[]>();
   const [plan_views, setPlans] = useState<PlanView[]>();
@@ -72,9 +74,7 @@ function Home() {
         colorScheme="teal"
         variant="outline"
         size="sm"
-        onClick={() => {
-          window.location.href = '/manage-teams';
-        }}
+        onClick={() => navigate('/manage-teams')}
       >
         Manage Teams
       </Button>
@@ -82,9 +82,7 @@ function Home() {
         colorScheme="teal"
         variant="outline"
         size="sm"
-        onClick={() => {
-          window.location.href = '/manage-schedules';
-        }}
+        onClick={() => navigate('/manage-schedules')}
       >
         Manage Schedules
       </Button>
