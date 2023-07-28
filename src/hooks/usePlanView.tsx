@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import { get } from '../api';
-import { User } from '../types';
+import { PlanView } from '../types';
 
 const defaults = {
   enabled: true,
@@ -9,15 +9,16 @@ const defaults = {
   refetchOnMount: false,
   staleTime: Infinity,
 };
-export default function useUser(userId: number, settings = defaults) {
-  const { data: user, ...rest } = useQuery(
-    'user',
-    () => get<User>('user', userId),
+
+export default function usePlanView(id: number, settings = defaults) {
+  const { data: planView, ...rest } = useQuery(
+    'plans_view',
+    () => get<PlanView>('plans_view', id),
     {
       ...defaults,
       ...settings,
     },
   );
 
-  return { user, ...rest };
+  return { planView, ...rest };
 }

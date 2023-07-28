@@ -13,6 +13,8 @@ import { getAll } from '../api';
 import TeamSchedule from './TeamSchedule';
 import MySchedule from './MySchedule';
 import { PlanView, Team, User } from '../types';
+import Header from './Header';
+import Footer from './Footer';
 
 function Home() {
   const navigate = useNavigate();
@@ -65,16 +67,14 @@ function Home() {
 
   return (
     <div className="Home">
-      <header className="home-header">
-        <div className="home-title">DE</div>
-      </header>
+      <Header />
       <Button
         colorScheme="teal"
         variant="outline"
         size="sm"
         onClick={() => navigate('/manage-teams')}
       >
-        Manage Teams
+        Edit Sunday Template
       </Button>
       <Button
         colorScheme="teal"
@@ -95,6 +95,7 @@ function Home() {
           <TabPanel>{MySchedule({ plan_views, teams, users })}</TabPanel>
         </TabPanels>
       </Tabs>
+      <Footer />
     </div>
   );
 }

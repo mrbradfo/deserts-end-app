@@ -26,6 +26,7 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { User, VolunteerProps } from '../types';
+import Footer from './Footer';
 
 function TeamSchedule({ plan_views, users, teams }: VolunteerProps) {
   const {
