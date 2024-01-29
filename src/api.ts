@@ -14,6 +14,7 @@ const api = axios.create({
 axios.create({});
 
 export const get = async <T>(path: string, id: number): Promise<T> => {
+  console.log('get:', path, id);
   return api
     .get(`${path}/${id}`)
     .then((response) => {

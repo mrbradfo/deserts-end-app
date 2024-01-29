@@ -1,14 +1,23 @@
 import { useEffect, useState } from 'react';
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
+import {
+  Button,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+} from '@chakra-ui/react';
 import './Home.css';
+import { useNavigate } from 'react-router';
 import { getAll } from '../api';
 import TeamSchedule from './TeamSchedule';
 import MySchedule from './MySchedule';
 import { PlanView, Team, User } from '../types';
-import UsersPage from './UsersPage';
-import TeamsPage from './TeamsPage';
+import Header from './Header';
+import Footer from './Footer';
 
 function Home() {
+  const navigate = useNavigate();
   const [users, setUsers] = useState<User[]>();
   const [teams, setTeams] = useState<Team[]>();
   const [plan_views, setPlans] = useState<PlanView[]>();
@@ -58,24 +67,35 @@ function Home() {
 
   return (
     <div className="Home">
-      <header className="home-header">
-        <div className="home-title">DE</div>
-      </header>
+      <Header />
+      <Button
+        colorScheme="teal"
+        variant="outline"
+        size="sm"
+        onClick={() => navigate('/manage-teams')}
+      >
+        Edit Sunday Template
+      </Button>
+      <Button
+        colorScheme="teal"
+        variant="outline"
+        size="sm"
+        onClick={() => navigate('/manage-schedules')}
+      >
+        Manage Schedules
+      </Button>
       <Tabs variant="enclosed" className="tabs">
         <TabList>
           <Tab>Team Schedule</Tab>
           <Tab>My Schedule</Tab>
-          <Tab>Users</Tab>
-          <Tab>Teams</Tab>
         </TabList>
 
         <TabPanels>
           <TabPanel>{TeamSchedule({ plan_views, teams, users })}</TabPanel>
           <TabPanel>{MySchedule({ plan_views, teams, users })}</TabPanel>
-          <TabPanel>{UsersPage({ plan_views, teams, users })}</TabPanel>
-          <TabPanel>{TeamsPage({ plan_views, teams, users })}</TabPanel>
         </TabPanels>
       </Tabs>
+      <Footer />
     </div>
   );
 }
