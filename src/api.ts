@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-const baseURL = process.env.REACT_APP_API_ENDPOINT;
-console.log('REACT_APP_API_ENDPOINT:', baseURL);
+const baseURL = import.meta.env.VITE_API_ENDPOINT;
 
 const api = axios.create({
   baseURL,
@@ -10,6 +9,8 @@ const api = axios.create({
     Accept: 'application/json',
   },
 });
+
+const unusedvar = 0;
 
 axios.create({});
 
