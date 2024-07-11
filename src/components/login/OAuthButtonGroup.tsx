@@ -1,15 +1,12 @@
-import { Button, ButtonGroup, VisuallyHidden } from '@chakra-ui/react';
-import { GoogleIcon } from './ProviderIcons';
+import { Box, VisuallyHidden } from '@chakra-ui/react';
+import { SlackIcon } from './ProviderIcons';
 
-const providers = [{ name: 'Google', icon: <GoogleIcon boxSize="5" /> }];
+const clientId = import.meta.env.VITE_APP_SLACK_CLIENT_ID;
+const redirectURI = import.meta.env.VITE_APP_SLACK_REDIRECT_URI;
 
-export const OAuthButtonGroup = () => (
-  <ButtonGroup variant="outline" spacing="4" width="full">
-    {providers.map(({ name, icon }) => (
-      <Button key={name} width="full">
-        <VisuallyHidden>Sign in with{name}</VisuallyHidden>
-        {icon}
-      </Button>
-    ))}
-  </ButtonGroup>
+export const OAuthButton = () => (
+  <Box display="flex" alignItems="center" justifyContent="center">
+    <VisuallyHidden>Sign in with Slack</VisuallyHidden>
+    {SlackIcon(clientId, redirectURI)}
+  </Box>
 );
