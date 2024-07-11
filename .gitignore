@@ -90,3 +90,5 @@ typings/
 build/
 
 .DS_Store
+
+dist/
